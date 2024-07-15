@@ -72,6 +72,20 @@ public class LoginTest extends BaseTest {
                 .isTrue();
     }
 
+    @Test(groups = {"regression", "ui"})
+    @Story("Login page title is correct")
+    @Severity(SeverityLevel.MINOR)
+    public void testLoginPageTitle() {
+        assertThat(loginPage.getPageTitle()).isEqualTo("Swag Labs");
+    }
+
+    @Test(groups = {"smoke", "ui"})
+    @Story("Login button is visible on page load")
+    @Severity(SeverityLevel.NORMAL)
+    public void testLoginButtonIsDisplayed() {
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+    }
+
     @DataProvider(name = "validUsers")
     public Object[][] validUsers() {
         return new Object[][]{
