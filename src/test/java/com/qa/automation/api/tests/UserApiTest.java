@@ -156,6 +156,21 @@ public class UserApiTest extends BaseApiTest {
             .body("per_page", equalTo(expectedPerPage));
     }
 
+    @Test(groups = {"regression", "api"})
+    @Story("Second page of users is accessible")
+    @Severity(SeverityLevel.NORMAL)
+    public void testGetUsersOnPage2() {
+        given()
+            .queryParam("page", 2)
+        .when()
+            .get(ApiEndpoints.USERS)
+        .then()
+            .statusCode(200)
+            .body("page", equalTo(2))
+            .body("data", not(empty()))
+            .body("total_pages", greaterThanOrEqualTo(2));
+    }
+
     @DataProvider(name = "pageNumbers")
     public Object[][] pageNumbers() {
         return new Object[][]{{1, 6}, {2, 6}};
