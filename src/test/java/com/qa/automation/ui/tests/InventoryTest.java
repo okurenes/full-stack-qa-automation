@@ -5,6 +5,7 @@ import com.qa.automation.ui.pages.CartPage;
 import com.qa.automation.ui.pages.InventoryPage;
 import com.qa.automation.ui.pages.LoginPage;
 import io.qameta.allure.*;
+import java.util.List;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -64,6 +65,15 @@ public class InventoryTest extends BaseTest {
 
         assertThat(cartPage.isLoaded()).isTrue();
         assertThat(cartPage.getItemNames()).contains(productName);
+    }
+
+    @Test(groups = {"regression", "ui"})
+    @Story("All product names are non-empty")
+    @Severity(SeverityLevel.NORMAL)
+    public void testProductNamesAreNotEmpty() {
+        List<String> names = inventoryPage.getAllProductNames();
+        assertThat(names).isNotEmpty();
+        names.forEach(name -> assertThat(name).as("Product name should not be blank").isNotBlank());
     }
 
     @Test(groups = {"regression", "ui"})
