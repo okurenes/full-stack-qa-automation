@@ -81,4 +81,20 @@ public class AuthApiTest extends BaseApiTest {
             .statusCode(400)
             .body("error", equalTo("Missing password"));
     }
+
+    @Test(groups = {"regression", "api"})
+    @Story("Registration fails without email")
+    @Description("POST /api/register without email field returns 400 with error message")
+    @Severity(SeverityLevel.NORMAL)
+    public void testRegistrationWithoutEmail() {
+        Map<String, String> body = Map.of("password", "pistol");
+
+        given()
+            .body(body)
+        .when()
+            .post(ApiEndpoints.REGISTER)
+        .then()
+            .statusCode(400)
+            .body("error", not(emptyString()));
+    }
 }
