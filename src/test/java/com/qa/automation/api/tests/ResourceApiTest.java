@@ -67,4 +67,17 @@ public class ResourceApiTest extends BaseApiTest {
             .statusCode(200)
             .time(lessThan(3000L));
     }
+
+    @Test(groups = {"regression", "api"})
+    @Story("Resource color value is a valid hex code")
+    @Severity(SeverityLevel.NORMAL)
+    public void testResourceColorIsValidHex() {
+        given()
+        .when()
+            .get(ApiEndpoints.RESOURCES)
+        .then()
+            .statusCode(200)
+            .body("data[0].color", matchesPattern("^#[0-9A-Fa-f]{6}$"))
+            .body("data[1].color", matchesPattern("^#[0-9A-Fa-f]{6}$"));
+    }
 }
