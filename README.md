@@ -114,3 +114,17 @@ GitHub Actions runs on every push and pull request:
 4. **Allure Report** — aggregates all results, deploys to GitHub Pages on `main`
 
 Scheduled nightly run: weekdays at 06:00 UTC.
+
+## Troubleshooting
+
+**Chrome not found on CI**
+Ensure the `browser-actions/setup-chrome` step runs before the test step. Locally, WebDriverManager downloads the driver automatically.
+
+**Allure report is empty**
+Run `mvn test` first to generate `target/allure-results`, then `mvn allure:serve`.
+
+**Tests timing out**
+Increase `explicit.wait` in `config.properties` or set `-Dexplicit.wait=30` on the command line.
+
+**REST Assured SSL errors**
+Add `.relaxedHTTPSValidation()` to `RequestSpecBuilder` in `BaseApiTest` for self-signed certs.
