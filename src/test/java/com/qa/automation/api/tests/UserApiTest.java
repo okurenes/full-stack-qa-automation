@@ -177,6 +177,33 @@ public class UserApiTest extends BaseApiTest {
     }
 
     @Test(groups = {"regression", "api"})
+    @Story("Users list matches JSON schema")
+    @Severity(SeverityLevel.CRITICAL)
+    public void testUsersListMatchesSchema() {
+        given()
+            .queryParam("page", 1)
+        .when()
+            .get(ApiEndpoints.USERS)
+        .then()
+            .statusCode(200)
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/users-list-schema.json"));
+    }
+
+    @Test(groups = {"regression", "api"})
+    @Story("User avatar URL is a non-empty string")
+    @Severity(SeverityLevel.MINOR)
+    public void testUserAvatarIsNotEmpty() {
+        given()
+            .pathParam("id", 1)
+        .when()
+            .get(ApiEndpoints.USER_BY_ID)
+        .then()
+            .statusCode(200)
+            .body("data.avatar", not(emptyString()))
+            .body("data.avatar", containsString("https://"));
+    }
+
+    @Test(groups = {"regression", "api"})
     @Story("User response matches JSON schema")
     @Severity(SeverityLevel.CRITICAL)
     public void testUserResponseSchema() {
