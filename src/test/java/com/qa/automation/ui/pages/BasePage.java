@@ -66,4 +66,16 @@ public abstract class BasePage {
             return false;
         }
     }
+
+    protected boolean waitForInvisibility(WebElement element) {
+        try {
+            return wait.until(ExpectedConditions.invisibilityOf(element));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected void waitForUrl(String urlFragment) {
+        wait.until(ExpectedConditions.urlContains(urlFragment));
+    }
 }
