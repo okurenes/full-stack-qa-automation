@@ -64,6 +64,15 @@ public class CheckoutTest extends BaseTest {
     }
 
     @Test(groups = {"regression", "ui"})
+    @Story("Confirmation page URL is correct after order")
+    @Severity(SeverityLevel.NORMAL)
+    public void testConfirmationPageUrl() {
+        CheckoutPage checkoutPage = cartPage.proceedToCheckout();
+        checkoutPage.completeCheckout("Ali", "Yilmaz", "34000");
+        assertThat(checkoutPage.getCurrentUrl()).contains("checkout-complete");
+    }
+
+    @Test(groups = {"regression", "ui"})
     @Story("Order summary shows total before confirming")
     @Severity(SeverityLevel.NORMAL)
     public void testOrderSummaryIsDisplayed() {
