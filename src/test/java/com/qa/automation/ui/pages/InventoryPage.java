@@ -85,6 +85,16 @@ public class InventoryPage extends BasePage {
         return productNames.stream().map(WebElement::getText).toList();
     }
 
+    @Step("Get product price at index {index}")
+    public String getProductPrice(int index) {
+        return getText(productPrices.get(index));
+    }
+
+    @Step("Get all product prices")
+    public List<String> getAllProductPrices() {
+        return productPrices.stream().map(WebElement::getText).toList();
+    }
+
     public String getPageHeading() {
         return getText(pageTitle);
     }
