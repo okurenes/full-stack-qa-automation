@@ -69,6 +69,19 @@ public class ResourceApiTest extends BaseApiTest {
     }
 
     @Test(groups = {"regression", "api"})
+    @Story("Resources list contains exactly 6 items per page")
+    @Severity(SeverityLevel.NORMAL)
+    public void testTotalResourcesCount() {
+        given()
+        .when()
+            .get(ApiEndpoints.RESOURCES)
+        .then()
+            .statusCode(200)
+            .body("data.size()", equalTo(6))
+            .body("per_page", equalTo(6));
+    }
+
+    @Test(groups = {"regression", "api"})
     @Story("Resource color value is a valid hex code")
     @Severity(SeverityLevel.NORMAL)
     public void testResourceColorIsValidHex() {
