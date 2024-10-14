@@ -29,10 +29,15 @@ public class InventoryTest extends BaseTest {
     @Description("Inventory page displays all available products")
     @Severity(SeverityLevel.CRITICAL)
     public void testInventoryPageLoads() {
-        assertThat(inventoryPage.isLoaded()).isTrue();
+        assertThat(inventoryPage.isLoaded())
+                .as("Inventory page should be loaded after login")
+                .isTrue();
         assertThat(inventoryPage.getProductCount())
-                .as("Should display 6 products")
+                .as("Inventory should display exactly 6 products")
                 .isEqualTo(6);
+        assertThat(inventoryPage.getPageHeading())
+                .as("Page heading should be 'Products'")
+                .isEqualTo("Products");
     }
 
     @Test(groups = {"regression", "ui"})
