@@ -47,6 +47,18 @@ public class LoadTest {
     }
 
     @Test(groups = {"performance"})
+    @Story("Spike test — sudden burst of 75 users")
+    @Description("Simulates a sudden traffic spike; error rate must stay below 10%")
+    @Severity(SeverityLevel.NORMAL)
+    public void testSpikeLoad() throws Exception {
+        PerformanceResult result = runLoad(75, 75, Duration.ofSeconds(30));
+        logResults("Spike Load", result);
+        assertThat(result.errorRate())
+                .as("Error rate under spike should stay below 10%%")
+                .isLessThanOrEqualTo(0.10);
+    }
+
+    @Test(groups = {"performance"})
     @Story("Stress test — 50 concurrent users")
     @Description("50 virtual users to find the breaking point; p99 < 5s")
     @Severity(SeverityLevel.NORMAL)
