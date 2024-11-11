@@ -12,6 +12,7 @@ jobs:
   api-tests:
     name: API Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -35,6 +36,7 @@ jobs:
   ui-tests:
     name: UI Tests (Headless Chrome)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -68,6 +70,7 @@ jobs:
   performance-tests:
     name: Performance Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: api-tests
     steps:
       - uses: actions/checkout@v4
