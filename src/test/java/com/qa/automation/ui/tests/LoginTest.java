@@ -86,6 +86,16 @@ public class LoginTest extends BaseTest {
         assertThat(loginPage.isOnLoginPage()).isTrue();
     }
 
+    @Test(groups = {"regression", "ui"})
+    @Story("Username with leading/trailing spaces is rejected")
+    @Severity(SeverityLevel.MINOR)
+    public void testLoginWithWhitespaceUsername() {
+        loginPage.loginWithInvalidCredentials("  standard_user  ", "secret_sauce");
+        assertThat(loginPage.isErrorDisplayed())
+                .as("Login with padded spaces should fail or display error")
+                .isTrue();
+    }
+
     @DataProvider(name = "validUsers")
     public Object[][] validUsers() {
         return new Object[][]{
