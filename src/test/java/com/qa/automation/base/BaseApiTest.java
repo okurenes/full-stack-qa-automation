@@ -39,6 +39,10 @@ public class BaseApiTest {
                 .addFilter(new AllureRestAssured())
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
+                .setConfig(io.restassured.config.RestAssuredConfig.config()
+                        .httpClient(io.restassured.config.HttpClientConfig.httpClientConfig()
+                                .setParam("http.connection.timeout", 10000)
+                                .setParam("http.socket.timeout", 10000)))
                 .build();
 
         responseSpec = new ResponseSpecBuilder()
