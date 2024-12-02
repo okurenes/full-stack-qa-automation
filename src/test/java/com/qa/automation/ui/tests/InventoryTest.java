@@ -82,6 +82,17 @@ public class InventoryTest extends BaseTest {
     }
 
     @Test(groups = {"regression", "ui"})
+    @Story("All product prices contain dollar sign")
+    @Severity(SeverityLevel.NORMAL)
+    public void testProductPricesContainDollarSign() {
+        List<String> prices = inventoryPage.getAllProductPrices();
+        assertThat(prices).isNotEmpty();
+        prices.forEach(price -> assertThat(price)
+                .as("Price should start with '$'")
+                .startsWith("$"));
+    }
+
+    @Test(groups = {"regression", "ui"})
     @Story("Remove product from cart")
     @Severity(SeverityLevel.NORMAL)
     public void testRemoveItemFromCart() {
