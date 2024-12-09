@@ -7,6 +7,14 @@
         <File name="FileLogger" fileName="target/logs/test-execution.log" append="false">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
+        <RollingFile name="RollingFile" fileName="target/logs/rolling.log"
+                     filePattern="target/logs/rolling-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Root level="INFO">
@@ -16,6 +24,7 @@
         <Logger name="com.qa.automation" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileLogger"/>
+            <AppenderRef ref="RollingFile"/>
         </Logger>
         <Logger name="io.restassured" level="WARN" additivity="false">
             <AppenderRef ref="Console"/>
