@@ -1,6 +1,27 @@
 # Full-Stack QA Automation Framework
 
+![CI](https://github.com/okurenes/full-stack-qa-automation/actions/workflows/ci.yml/badge.svg)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Selenium](https://img.shields.io/badge/Selenium-4.x-green)
+![REST Assured](https://img.shields.io/badge/REST--Assured-5.x-orange)
+
 Enterprise-grade test automation framework built with Java, covering UI, API, BDD, and Performance testing layers.
+
+## Framework Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│             Test Suites (TestNG)            │
+├──────────┬──────────┬──────────┬────────────┤
+│  UI Tests│ API Tests│ BDD Tests│  Perf Tests│
+│ Selenium │  REST    │ Cucumber │  Java Load │
+│   + POM  │ Assured  │ Gherkin  │  Runner    │
+├──────────┴──────────┴──────────┴────────────┤
+│          Base Classes + Config              │
+├─────────────────────────────────────────────┤
+│     Allure Reports + Log4j2 + CI/CD        │
+└─────────────────────────────────────────────┘
+```
 
 ## Tech Stack
 
